@@ -11,18 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-
-Auth::routes();
+Route::get('/', 'HomeController@welcome');
 
 Route::get('/home', 'HomeController@index');
