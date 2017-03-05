@@ -9,6 +9,8 @@
     <div class="alert alert-success" role="alert">{{session('success')}}</div>
   @endif
 
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
   <div class="panel panel-default">
     <div class="panel-heading">拥有角色</div>
     <div class="panel-body">

@@ -64,7 +64,7 @@ class SystemController extends Controller
     {
         $model = User::find($id);
         if ($request->get('action') == 'group') {
-            $model->roles()->detach($model->roles->lists('id')->toArray());
+            $model->roles()->detach();
             $model->roles()->attach($request->get('gids'));
             $model->save();
             return redirect()->back();
@@ -78,8 +78,8 @@ class SystemController extends Controller
             return $item = 0;
         }, $diff0);
         unset($diff0['super']);
-        $model->permissions = json_encode($diff0 + $diff1);
-
+        
+        $model->permissions = array_merge($diff0, $diff1);
         $model->save();
 
         return redirect()->back()->with('success', '保存成功');
