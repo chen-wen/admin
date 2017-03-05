@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
 use Wayne\Guard\NamesConfigHelper;
+use Wayne\Guard\Traits\HasManyRoles;
 
 class User extends Authenticatable
 {
     protected $table = 'system_users';
 
-    use Notifiable;
+    use Notifiable, HasManyRoles, SearchTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +31,30 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // 关联关系
+    /**
+     * relation roles
+     * @return [type] [description]
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'system_users_roles');
+    }
+
+    public function getSearchHandles()
+    {
+        return [
+            'name'  => function ($query, $value, $request) {
+                $query->where('name', 'like', '%' . $value . '%');
+            },
+            'email' => function ($query, $value, $request) {
+                $query->where('email', 'like', '%' . $value . '%');
+            },
+        ];
+    }
+
+
+    // 处理个人权限展示
     public function getSelfNav()
     {
         $menus = NamesConfigHelper::getConfig();
