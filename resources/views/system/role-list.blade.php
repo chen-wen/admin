@@ -18,10 +18,6 @@
 </div>
 
 
-
-
-
-
 <div class="panel panel-default">
     <div class="panel-heading text-right">
         <span>
@@ -52,7 +48,6 @@
             <td>{{$item->name}}</td>
             <td>
                 <a href="{{route('system.role.show',[$item->id])}}">查看权限</a>
-                <a href="{{route('system.role.users',[$item->id])}}">查看用户</a>
             </td>
         </tr>
         @endforeach
