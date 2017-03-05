@@ -7,7 +7,7 @@ return [
     'namespace'  => 'App\Http\Controllers',
     'middleware' => [
         'web', 'guard.auth',
-        'guard.throttle', 'guard.log',
+        'guard.throttle', 'guard.logger',
     ],
     'groups'     => [
         'Dashboard' => [

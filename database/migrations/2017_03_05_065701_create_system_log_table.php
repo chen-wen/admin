@@ -4,22 +4,26 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateSystemLogTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+        /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
-        Schema::create('system_users', function (Blueprint $table) {
+        Schema::create('system_logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('activated');
-            $table->string('name', 50);
-            $table->string('email', 100)->unique();
-            $table->string('password', 100);
-            $table->rememberToken();
+            $table->integer('uid');
+            $table->string('log');
+            $table->text('data');
+            $table->string('action', 30);
             $table->timestamps();
         });
     }
@@ -31,6 +35,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system_users');
+        Schema::dropIfExists('system_logs');
     }
 }
