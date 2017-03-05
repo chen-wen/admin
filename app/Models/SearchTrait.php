@@ -22,12 +22,12 @@ trait SearchTrait
         foreach ($params as $key => $value) {
             if (empty($value)) {
                 if (isset($handles["__{$key}__"])) {
-                    $handles["__{$key}__"]($query, $value, $request);
+                    $handles["__{$key}__"]($query, $value, $params);
                 } else {
                     continue;
                 }
             } elseif (is_callable($handles[$key])) {
-                $handles[$key]($query, $value, $request);
+                $handles[$key]($query, $value, $params);
             }
         }
         return $query;
