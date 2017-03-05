@@ -65,6 +65,7 @@ return [
             'group'  => '70',
             'type'   => 'page',
             'refer'  => 'system.user.index', // 非菜单页的从哪个菜单页过来的key
+            'log.file' => '【{{user.name}}】保存了【{{model.name}}】的权限',
         ],
         'system.role.index' => [
             'uri'    => 'role/index',

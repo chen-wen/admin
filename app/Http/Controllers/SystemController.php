@@ -63,6 +63,7 @@ class SystemController extends Controller
     public function saveUser(Request $request, $id)
     {
         $model = User::find($id);
+        app()->instance('model', $model);
         if ($request->get('action') == 'group') {
             $model->roles()->detach();
             $model->roles()->attach($request->get('gids'));
