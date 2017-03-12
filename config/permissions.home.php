@@ -6,7 +6,7 @@ return [
     'prefix'     => '', // 路由前缀
     'namespace'  => 'App\Http\Controllers',
     'middleware' => [
-        'web', 'guard.auth',
+        'web', 'guard.auth', 'guard.permission',
         'guard.throttle', 'guard.logger',
     ],
     'groups'     => [

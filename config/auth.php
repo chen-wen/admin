@@ -18,6 +18,10 @@ return [
         'passwords' => 'users',
     ],
 
+    'authorizate' => [
+        'switch'=> true,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards

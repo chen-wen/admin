@@ -31,6 +31,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'permissions' => 'array',
+    ];
+
     // 关联关系
     /**
      * relation roles

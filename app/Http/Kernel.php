@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'guard.throttle' => \Wayne\Guard\Middleware\AccessThrottle::class,
         'guard.logger' => \Wayne\Guard\Middleware\AccessLogger::class,
         'guard.auth' => \Wayne\Guard\Middleware\Authenticate::class,
+        'guard.permission' => \Wayne\Guard\Middleware\Authorizate::class,
 
     ];
 }
