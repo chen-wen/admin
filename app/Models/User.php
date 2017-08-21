@@ -62,9 +62,18 @@ class User extends Authenticatable
     public function getSelfNav()
     {
         $menus = NamesConfigHelper::getConfig();
+        $perm = $this->getPermissions();
         $navs  = [];
         foreach ($menus as $key => $node) {
-            $navs[$node['index']] = $node['name'];
+            foreach($node['groups'] as &$group){
+                $group = array_intersect($group, array_keys($perm));
+            }
+            $node['groups'] = array_filter($node['groups'], function($group){
+                return !empty($group);
+            });
+            if (!empty($node['groups'])) {
+                $navs[$node['index']] = $node['name'];
+            }
         }
         return $navs;
     }
@@ -74,12 +83,22 @@ class User extends Authenticatable
         // app('route')->current();
         $name  = app('router')->currentRouteName();
         $menus = NamesConfigHelper::getConfig();
+        $perm = $this->getPermissions();
+        $node = null; 
         foreach ($menus as $key => $group) {
             if (isset($group['routes'][$name])) {
-                return $group;
+                $node = $group;
+                break;
             }
         }
-        return [];
+        foreach($node['groups'] as &$group){
+            $group = array_intersect($group, array_keys($perm));
+        }
+        $node['groups'] = array_filter($node['groups'], function($group){
+            return !empty($group);
+        });
+
+        return $node;
     }
 
     public function getCurrentNav()

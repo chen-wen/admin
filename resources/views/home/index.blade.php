@@ -6,8 +6,8 @@
 
     <div class="panel-body">
         <h1 class="text-center">欢迎使用Laravel来开发您的系统</h1>
-        <h3>test</h3>
-        <p>test</p>
+        @can('welcome')<h3>has `welcome` permission</h3> @endcan
+        @can('home')<p>has `home` permission</p> @endcan
     </div>
 </div>
 @endsection
