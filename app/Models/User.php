@@ -91,14 +91,17 @@ class User extends Authenticatable
                 break;
             }
         }
-        foreach($node['groups'] as &$group){
-            $group = array_intersect($group, array_keys($perm));
-        }
-        $node['groups'] = array_filter($node['groups'], function($group){
-            return !empty($group);
-        });
+        if (!empty($node)) {
+            foreach($node['groups'] as &$group){
+                $group = array_intersect($group, array_keys($perm));
+            }
+            $node['groups'] = array_filter($node['groups'], function($group){
+                return !empty($group);
+            });
 
-        return $node;
+            return $node;
+        }
+        return [];
     }
 
     public function getCurrentNav()
